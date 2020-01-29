@@ -4,13 +4,13 @@ function generateToken(user) {
   const payload = {
     subject: user.id, 
     username: user.username,
-    department: user.department
+    role: user.role
   };
 
   const secret = process.env.JWT_SECRET || 'A secret is a secret does.'
 
   const options = {
-    expiresIn: '1d',
+    expiresIn: '7d',
   };
 
   return jwt.sign(payload, secret, options);
