@@ -1,21 +1,24 @@
 const jwt = require('jsonwebtoken');
 
-function generateToken(user) {
-  const payload = {
-    subject: user.id, 
-    username: user.username,
-    department: user.department
-  };
+const validateToken = (req, res, next) => {
+  const { authorization } = req.headers
 
-  const secret = process.env.JWT_SECRET || 'A secret is a secret does.'
+  if (authorization) {
+    const secret = process.env.JWT_SECRET || 'A secret is a secret does.'
+    jwt.verify(authorization, secret, function(err, decodedToken) {
+      if (err) {
+        res.status(401).json({ message: "Invalid Token!"})
+      } else {
+        req.token = decodedToken;
 
-  const options = {
-    expiresIn: '1d',
-  };
-
-  return jwt.sign(payload, secret, options);
+        next()
+      }
+    })
+  } else {
+    res.status(400).json({ message: "You are not verified. Please login."})
+  }
 }
 
 module.exports = {
-  generateToken
+  validateToken
 }
