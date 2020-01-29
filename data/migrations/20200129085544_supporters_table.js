@@ -16,7 +16,6 @@ exports.up = async function(knex) {
 
     table.integer("campaigns_supported")
       .unsigned()
-    table.foreign("campaigns_supported")
       .references("id")
       .inTable("campaigns")
       .onDelete("CASCADE")
