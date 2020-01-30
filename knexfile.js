@@ -1,3 +1,14 @@
+const localPg = {
+	host: process.env.DB_HOST,
+	database: process.env.DB_NAME,
+	user: process.env.DB_USER,
+	password: process.env.DB_PASS
+};
+
+const pg = require('pg');
+pg.defaults.ssl = true;
+const dbConnection = process.env.DATABASE_URL || localPg; // used to prevent random errors
+
 module.exports = {
 
   development: {
@@ -40,7 +51,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: process.env.DATABASE_URL,
+    connection: dbConnection,
     pool: {
       min: 2,
       max: 10
