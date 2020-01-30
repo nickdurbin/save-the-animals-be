@@ -1,5 +1,7 @@
 exports.up = async function(knex) {
   await knex.schema.createTable("supporters", (table) => {
+    table.increments()
+
     table.integer("supporter_id")
       .unsigned()
       .references("id")
@@ -9,12 +11,13 @@ exports.up = async function(knex) {
       .unique()
       .notNullable()
 
-    table.string("first_name", 128)
+    table.float("dontation", 2)
       .notNullable()
-    table.string("last_name", 128)
+    table.string("message", 255)
       .notNullable()
+      .defaultTo("Thank you for your support of the project and helping Save the Animals make a real difference!")
 
-    table.integer("campaigns_supported")
+    table.integer("campaigns_id")
       .unsigned()
       .references("id")
       .inTable("campaigns")
@@ -22,11 +25,9 @@ exports.up = async function(knex) {
       .onUpdate("CASCADE")
       .unique()
       .notNullable()
-
-    table.primary('supporter_id');
   })
 };
 
 exports.down = async function(knex) {
-  await knex.schema.dropTableIfExists("organizations")
+  await knex.schema.dropTableIfExists("supporters")
 };

@@ -16,10 +16,10 @@ exports.up = async function(knex) {
     table.float("funding_goal")
       .notNullable()
     
-    table.integer("campaign_support_id")
+    table.integer("donation_id")
       .unsigned()
       .references("id")
-      .inTable("campaigns_support")
+      .inTable("supporters")
       .onDelete("CASCADE")
       .onUpdate("CASCADE")
       .unique()
