@@ -13,18 +13,18 @@ exports.up = async function(knex) {
       .notNullable()
     table.string("description", 255)
       .notNullable()
-
-    table.integer("animal_id")
-      .unsigned()
-      .notNullable()
-      .references("id")
-      .inTable("animals")
-      .onDelete("CASCADE")
-      .onUpdate("CASCADE")
-
     table.float("funding_goal")
       .notNullable()
-    table.float("donations")
+    
+    table.integer("campaign_support_id")
+      .unsigned()
+      .references("id")
+      .inTable("campaigns_support")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE")
+      .unique()
+      .notNullable()
+
     table.text("images")
     table.boolean("completed")
       .notNullable()
