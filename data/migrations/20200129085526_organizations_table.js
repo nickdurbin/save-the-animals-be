@@ -1,12 +1,14 @@
 exports.up = async function(knex) {
   await knex.schema.createTable("organizations", (table) => {
-    table.integer("organization_id")
-      .unsigned()
-      .references("id")
-      .inTable("users")
-      .onDelete("RESTRICT")
-      .onUpdate("CASCADE")
+    table.increments()
+    
+    table.string("email")
       .unique()
+      .notNullable()
+    table.string("username", 128)
+      .unique()
+      .notNullable()
+    table.string("password", 128)
       .notNullable()
 
     table.string("org_name", 128)
@@ -22,8 +24,6 @@ exports.up = async function(knex) {
       .onUpdate("CASCADE")
       .unique()
       .notNullable()
-
-    table.primary(['organization_id', 'campaign_id']);
   })
 };
 
