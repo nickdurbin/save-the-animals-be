@@ -6,8 +6,8 @@ router.get("/", async (req, res, next) => {
   try {
     const campaigns = await Campaigns.find()
     res.json(campaigns)
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 })
 
@@ -16,8 +16,9 @@ router.get("/:id", async (req, res, next) => {
     const { id } = req.params
     const campaign = await Campaigns.findById(id)
     return res.json(campaign)
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    console.log(error)
+    next(error)
   }
 })
 
