@@ -11,7 +11,7 @@ function findBy(filter) {
 
 function add(organization) {
   organization.password = bcrypt.hashSync(organization.password, 14)
-  db("organizations").insert(organization).returning("*")
+  return db("organizations").insert(organization).returning("*")
 }
 
 function findById(id) {

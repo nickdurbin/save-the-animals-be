@@ -8,7 +8,8 @@ exports.seed = function(knex) {
           username: 'user', 
           password: "password", 
           first_name: "Bob", 
-          last_name: "Barker"
+          last_name: "Barker",
+          isOrg: false
         },
         {
           id: 2, 
@@ -16,7 +17,8 @@ exports.seed = function(knex) {
           username: 'user1', 
           password: "password", 
           first_name: "Michelle", 
-          last_name: "Obama"
+          last_name: "Obama",
+          isOrg: false
         },
         {
           id: 3, 
@@ -24,7 +26,8 @@ exports.seed = function(knex) {
           username: 'user2', 
           password: "password", 
           first_name: "Baker", 
-          last_name: "Mayfield"
+          last_name: "Mayfield",
+          isOrg: false
         },
       ]);
     });

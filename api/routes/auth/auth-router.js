@@ -7,13 +7,13 @@ const router = express.Router()
 
 router.post("/register", async (req, res, next) => {
   try {
-    const user = await Users.add(req.body)
     const organization = await Organizations.add(req.body)
-
-    if (user) {
-      return res.status(201).json({ message: "User has been successfully registered.", user})
-    } else if (organization) {
+    const user = await Users.add(req.body)
+    
+    if (organization) {
       return res.status(201).json({ message: "Organization has been successfully registered.", organization })
+    } else if (user) {
+      return res.status(201).json({ message: "User has been successfully registered.", user})
     }
 
   } catch (error) {
@@ -27,7 +27,7 @@ router.post("/login", async (req, res, next) => {
     const { username, password } = req.body
     const user = await Users.findBy({ username }).first()
     const organization = await Organizations.findBy({ username }).first()
-    const passwordValid = await bcrypt.compare(password, user.password)
+    const passwordValid = await bcrypt.compare(password, user.password || organization.password)
 
     if (user && passwordValid) {
       const token = generateToken(user);

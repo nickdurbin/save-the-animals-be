@@ -8,7 +8,8 @@ exports.seed = function(knex) {
           username: "org1",
           password: "password", 
           org_name: "Help Animals", 
-          org_description: "The root of our mission is to provide shelter for endangered animals around the world.", 
+          org_description: "The root of our mission is to provide shelter for endangered animals around the world.",
+          isOrg: true, 
           campaign_id: 3 
         },
         {
@@ -17,7 +18,8 @@ exports.seed = function(knex) {
           username: "org2",
           password: "password",  
           org_name: "Habitat Builder", 
-          org_description: "We find ways to build sustainable habitats for animal species in various parts of the globe.", 
+          org_description: "We find ways to build sustainable habitats for animal species in various parts of the globe.",
+          isOrg: true, 
           campaign_id: 1 
         },
         {
@@ -26,7 +28,8 @@ exports.seed = function(knex) {
           username: "org3",
           password: "password",  
           org_name: "Life Preserver", 
-          org_description: "Our mission is to help restore balance in the ecosystem by providing aid to those that help keep it - animals.", 
+          org_description: "Our mission is to help restore balance in the ecosystem by providing aid to those that help keep it - animals.",
+          isOrg: true, 
           campaign_id: 2 
         },
       ]);

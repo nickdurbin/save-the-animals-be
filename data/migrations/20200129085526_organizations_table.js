@@ -15,6 +15,9 @@ exports.up = async function(knex) {
       .notNullable()
       .unique()
     table.string("org_description", 255)
+    table.boolean("isOrg")
+      .notNullable()
+      .defaultTo(true)
 
     table.integer("campaign_id")
       .unsigned()
@@ -23,7 +26,6 @@ exports.up = async function(knex) {
       .onDelete("CASCADE")
       .onUpdate("CASCADE")
       .unique()
-      .notNullable()
   })
 };
 

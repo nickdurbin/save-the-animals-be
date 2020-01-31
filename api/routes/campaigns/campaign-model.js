@@ -23,7 +23,7 @@ function add(campaign) {
 }
 
 function findById(id) {
-  return db("campaigns").where({ id }).first("id", "title")
+  return db("campaigns").where({ id }).first("id", "title", "animal", "date", "urgency", "image", "funding_goal", "completed")
 }
 
 function update(id, changes) {

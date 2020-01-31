@@ -7,8 +7,8 @@ router.get("/", async (req, res, next) => {
     const organizations = await Organizations.find()
    
     res.json(organizations)
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 })
 
@@ -17,8 +17,8 @@ router.get("/:id", async (req, res, next) => {
     const { id } = req.params
     const organization = await Organizations.findById(id)
     return res.json(organization)
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 })
 
@@ -27,22 +27,21 @@ router.post("/", async (req, res, next) => {
     const [id] = await db("organizations").insert(req.body)
     const newOrg = await db("organizations").where('id', id).first()
     return res.status(201).json(newOrg)
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 })
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const { id } = req.params
-    const organization = { username: req.body.username }
-    const updatedOrg = await Organizations.update(id, organization)
-    const newOrg = await Organizations.findById(id)
-    return res.status(200).json(newOrg)
+    const updatedOrg = await Organizations.update(req.params.id, req.body)
+
+    return res.status(200).json(updatedOrg)
   } catch(error) {
+    console.log(error)
     next(error)
   }
-})
+});
 
 router.delete("/:id", async (req, res, next) => {
   try {
