@@ -3,7 +3,7 @@ exports.seed = function(knex) {
     .then(function () {
       return knex('organizations').insert([
         {
-          organization_id: 1,
+          id: 1,
           email: "org1@org1.com",
           username: "org1",
           password: "password", 
@@ -12,7 +12,7 @@ exports.seed = function(knex) {
           campaign_id: 3 
         },
         {
-          organization_id: 2,
+          id: 2,
           email: "org2@org2.com",
           username: "org2",
           password: "password",  
@@ -21,7 +21,7 @@ exports.seed = function(knex) {
           campaign_id: 1 
         },
         {
-          organization_id: 3,
+          id: 3,
           email: "org3@org3.com",
           username: "org3",
           password: "password",  
