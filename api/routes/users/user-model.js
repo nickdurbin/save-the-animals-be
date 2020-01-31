@@ -9,23 +9,20 @@ function findBy(filter) {
   return db("users").where(filter).select("id", "email", "username", "role")
 }
 
-async function add(user) {
-  user.password = await bcrypt.hash(user.password, 14)
-  const [id] = await db("users").insert(user)
-
-  return findById(id)
+function add(user) {
+  user.password = bcrypt.hashSync(user.password, 14)
+  return db("users").insert(user).returning("*")
 }
 
 function findById(id) {
   return db("users").where({ id }).first("id", "username")
 }
 
-async function update(id, changes) {
-  await db("users")
+function update(id, changes) {
+  return db("users")
     .where({ id })
     .update(changes)
-
-  return findById(id)
+    .returning("*")
 }
 
 function remove(id) {
