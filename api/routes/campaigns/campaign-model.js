@@ -1,17 +1,10 @@
 const db = require('../../../data/db-config')
 
-function find() {
-  return db("campaigns")
-    .select(
-      "id", 
-      "title",
-      "animal", 
-      "urgency", 
-      "date", 
-      "description", 
-      "funding_goal",
-      "image",
-      "completed")
+async function find() {
+  const campaigns = await db("campaigns").select("*")
+  return campaigns.map((campaign) => {
+    return { ...campaign, completed: campaign.completed === 1 ? true : false }
+  })
 }
 
 function findBy(filter) {
@@ -22,8 +15,14 @@ function add(campaign) {
   return db("campaigns").insert(campaign).returning("*")
 }
 
-function findById(id) {
-  return db("campaigns").where({ id }).first("id", "title", "animal", "date", "urgency", "image", "funding_goal", "completed")
+async function findById(id) {
+  const campaign = await db("campaigns").where({ id }).first()
+  const donations = await db("supporters").where("campaign_id", id).select("donation", "message", "supporter_id")
+  const supporter = await db("supporters").join("users", "supporter_id", "=", "users.id").where("supporter_id", id).select("first_name", "last_name", "email", "username")
+  const donation = donations.map((dono) => {
+    return { ...dono, supporter_id: supporter }
+  })
+  return { ...campaign, completed: campaign.completed === 1 ? true : false, donation }
 }
 
 function update(id, changes) {
