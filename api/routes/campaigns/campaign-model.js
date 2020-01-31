@@ -18,22 +18,19 @@ function findBy(filter) {
   return db("campaigns").where(filter).select("id", "title", "date", "urgency", "completed")
 }
 
-async function add(campaign) {
-  const [id] = await db("campaigns").insert(campaign)
-
-  return findById(id)
+function add(campaign) {
+  return db("campaigns").insert(campaign).returning("*")
 }
 
 function findById(id) {
   return db("campaigns").where({ id }).first("id", "title")
 }
 
-async function update(id, changes) {
-  await db("campaigns")
+function update(id, changes) {
+  return db("campaigns")
     .where({ id })
     .update(changes)
-
-  return findById(id)
+    .returning("*")
 }
 
 function remove(id) {
