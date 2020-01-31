@@ -10,7 +10,7 @@ exports.seed = function(knex) {
         },
         {
           supporter_id: 2, 
-          donation: 1200.0055, 
+          donation: 1200.55, 
           message: "Thank you for your support of the project and helping, Save the Animals, make a real difference!", 
           campaign_id: 1 
         },
