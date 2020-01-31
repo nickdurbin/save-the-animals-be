@@ -8,6 +8,7 @@ router.get("/", async (req, res, next) => {
    
     res.json(users)
   } catch (err) {
+    console.log(err, 'get all users')
     next(err)
   }
 })
