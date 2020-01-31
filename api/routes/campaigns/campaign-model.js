@@ -4,18 +4,18 @@ function find() {
   return db("campaigns")
     .select(
       "id", 
-      "title", 
+      "title",
+      "animal", 
       "urgency", 
       "date", 
       "description", 
-      "animal_id", 
       "funding_goal",
       "image",
       "completed")
 }
 
 function findBy(filter) {
-  return db("campaigns").where(filter).select("id", "title", "date", "urgency", "completed")
+  return db("campaigns").where(filter).select("id", "title", "animal", "date", "urgency", "completed")
 }
 
 function add(campaign) {
