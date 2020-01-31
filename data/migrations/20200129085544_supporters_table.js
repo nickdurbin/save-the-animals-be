@@ -8,7 +8,6 @@ exports.up = async function(knex) {
       .inTable("users")
       .onDelete("CASCADE")
       .onUpdate("CASCADE")
-      .unique()
       .notNullable()
 
     table.float("donation", 2)
@@ -22,7 +21,6 @@ exports.up = async function(knex) {
       .inTable("campaigns")
       .onDelete("CASCADE")
       .onUpdate("CASCADE")
-      .unique()
       .notNullable()
   })
 };
