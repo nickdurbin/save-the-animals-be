@@ -5,7 +5,7 @@ const router = express.Router()
 router.get("/", async (req, res, next) => {
   try {
     const campaigns = await Campaigns.find()
-   
+   console.log(campaigns)
     res.json(campaigns)
   } catch (err) {
     next(err)
