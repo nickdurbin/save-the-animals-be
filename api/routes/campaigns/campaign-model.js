@@ -10,13 +10,12 @@ function find() {
       "description", 
       "animal_id", 
       "funding_goal",
-      "donations",
       "image",
       "completed")
 }
 
 function findBy(filter) {
-  return db("campaigns").where(filter).select("id", "title", "date", "urgency", "animal_id", "completed")
+  return db("campaigns").where(filter).select("id", "title", "date", "urgency", "completed")
 }
 
 async function add(campaign) {
