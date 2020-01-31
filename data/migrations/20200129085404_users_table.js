@@ -10,8 +10,6 @@ exports.up = async function(knex) {
       .notNullable()
     table.string("password", 128)
       .notNullable()
-    table.string("role")
-      .notNullable()
     table.string("first_name")
     table.string("last_name")
   })
