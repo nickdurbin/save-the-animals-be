@@ -17,12 +17,12 @@ function add(campaign) {
 
 async function findById(id) {
   const campaign = await db("campaigns").where({ id }).first()
-  const donations = await db("supporters").where("campaign_id", id).select("donation", "message", "supporter_id")
-  const supporter = await db("supporters").join("users", "supporter_id", "=", "users.id").where("supporter_id", id).select("first_name", "last_name", "email", "username")
-  const donation = donations.map((dono) => {
+  const donation = await db("supporters").where("campaign_id", id).select().sum("donation")
+  const supporter = await db("supporters").join("users", "supporter_id", "=", "users.id").where("campaign_id", id).select("first_name", "last_name", "email", "username", "donation", "message")
+  const donations = donation.map((dono) => {
     return { ...dono, supporter_id: supporter }
   })
-  return { ...campaign, completed: campaign.completed === 1 ? true : false, donation }
+  return { ...campaign, completed: campaign.completed === 1 ? true : false, donations }
 }
 
 function update(id, changes) {
