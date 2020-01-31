@@ -17,14 +17,6 @@ exports.up = async function(knex) {
       .notNullable()
     table.float("funding_goal")
       .notNullable()
-    
-    table.integer("donation_id")
-      .unsigned()
-      .references("id")
-      .inTable("supporters")
-      .onDelete("CASCADE")
-      .onUpdate("CASCADE")
-      .unique()
 
     table.text("image")
     table.boolean("completed")
