@@ -1,13 +1,25 @@
-
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('supporters')
     .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('supporters').insert([
+        {
+          supporter_id: 1, 
+          donation: 100.00, 
+          message: "Thank you for your support of the project and helping, Save the Animals, make a real difference!", 
+          campaign_id: 3 
+        },
+        {
+          supporter_id: 2, 
+          donation: 1200.00, 
+          message: "Thank you for your support of the project and helping, Save the Animals, make a real difference!", 
+          campaign_id: 1 
+        },
+        {
+          supporter_id: 3, 
+          donation: 800.00, 
+          message: "Thank you for your support of the project and helping, Save the Animals, make a real difference!", 
+          campaign_id: 2 
+        },
       ]);
     });
 };
