@@ -4,7 +4,6 @@ function generateToken(user) {
   const payload = {
     subject: user.id, 
     username: user.username,
-    role: user.role
   };
 
   const secret = process.env.JWT_SECRET || 'A secret is a secret does.'
