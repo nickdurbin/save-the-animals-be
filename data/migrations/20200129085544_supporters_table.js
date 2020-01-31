@@ -6,16 +6,15 @@ exports.up = async function(knex) {
       .unsigned()
       .references("id")
       .inTable("users")
-      .onDelete("RESTRICTED")
+      .onDelete("CASCADE")
       .onUpdate("CASCADE")
       .unique()
       .notNullable()
 
-    table.float("dontation", 2)
+    table.float("donation", 2)
       .notNullable()
     table.string("message", 255)
       .notNullable()
-      .defaultTo("Thank you for your support of the project and helping, Save the Animals, make a real difference!")
 
     table.integer("campaign_id")
       .unsigned()
