@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Save-The-Animals-Lambda-School/Backend#readme",
   "dependencies": {
+    "@sendgrid/mail": "^6.5.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
