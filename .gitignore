@@ -75,6 +75,7 @@ typings/
 .env
 .en.local
 .env.test
+sendgrid.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -108,4 +109,4 @@ dist
 .tern-port
 
 # Stores VSCode versions used for testing VSCode extensions
-.vscode-test
+.vscode-testsendgrid.env
