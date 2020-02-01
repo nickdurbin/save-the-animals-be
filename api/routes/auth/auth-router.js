@@ -4,42 +4,47 @@ const { generateToken } = require('../../middleware/validation/generateToken')
 const Users = require('../users/user-model')
 const Organizations = require('../organizations/organization-model')
 const router = express.Router()
+const Auth = require('../auth/auth_model')
 
-router.post("/register", async (req, res, next) => {
+router.post("/register/supporter", async (req, res, next) => {
   try {
-    const organization = await Organizations.add(req.body)
     const user = await Users.add(req.body)
     
-    if (organization) {
-      return res.status(201).json({ message: "Organization has been successfully registered.", organization })
-    } else if (user) {
+    if (user) {
       return res.status(201).json({ message: "User has been successfully registered.", user})
     }
 
+  } catch (error) { 
+    next(error)
+  }
+})
+
+router.post("/register/organization", async (req, res, next) => {
+  try {
+    const organization = await Organizations.add(req.body)
+    
+    if (organization) {
+      return res.status(201).json({ message: "Organization has been successfully registered.", organization })
+    } 
   } catch (error) {
-    console.log(error)
     next(error)
   }
 })
 
 router.post("/login", async (req, res, next) => {
   try {
-    const { username, password } = req.body
-    const user = await Users.findBy({ username }).first()
-    const organization = await Organizations.findBy({ username }).first()
-    const passwordValid = await bcrypt.compare(password, user.password || organization.password)
-
-    if (user && passwordValid) {
-      const token = generateToken(user);
-      res.status(200).json({ 
-        message: `Welcome, ${user.username}!`, token})
-    } else if (organization && passwordValid) {
-      const token = generateToken(organization);
-      res.status(200).json({ 
-        message: `Welcome, ${organization.username}!`, token})
-    } else {
-      res.status(401).json({ message: "Please try to login again!"})
+    const { email, password } = req.body
+    const account = await Auth.isAccount(email)
+   
+    if (!account) {
+      res.status(404).json({ message: "Sorry, but email or password is invalid." }) 
     }
+    const passwordValid = await bcrypt.compare(password, account.password)
+    if (!passwordValid) {
+      res.status(404).json({ message: "Sorry, but email or password is invalid." }) 
+    }
+    const token = generateToken(account);
+    res.status(200).json({ message: `Welcome, ${account.email}!`, token})
   } catch (error) {
     next(error)
   }

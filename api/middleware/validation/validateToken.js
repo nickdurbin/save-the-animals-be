@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 const validateToken = (req, res, next) => {
-  const { authorization, isOrg } = req.headers
+  const { authorization } = req.headers
 
-  if (authorization && isOrg === true) {
+  if (authorization) {
     const secret = process.env.JWT_SECRET || 'A secret is a secret does.'
     jwt.verify(authorization, secret, function(err, decodedToken) {
       if (err) {
