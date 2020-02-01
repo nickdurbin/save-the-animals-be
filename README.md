@@ -244,7 +244,7 @@ Register-Fields-Required
 ```
 # User
 
-## Updates current user information
+## Deletes current user information
 [Back to top](#top)
 
 <p>Deletes the current logged in user based on the provided token</p>
@@ -397,7 +397,7 @@ Email-Already-Taken
 
 # Organization
 
-## Updates current organization information
+## Deletes current organization information
 [Back to top](#top)
 
 <p>Deletes the current logged in organization based on the provided token</p>
@@ -448,7 +448,7 @@ Email-Already-Taken
     "message": "Email is already taken"
 }
 ```
-## Gets current Organization information
+## Gets current organization information
 [Back to top](#top)
 
 <p>Retrieves the current loggged-in organization based on the provided token</p>
@@ -553,7 +553,7 @@ Email-Already-Taken
 
 # Campaign
 
-## Updates current campaign information
+## Deletes current campaign information
 [Back to top](#top)
 
 <p>Deletes the current logged in organization campaign based on the provided token</p>
@@ -656,7 +656,7 @@ Success-Response:
 
 
 
-## Updates current organization information
+## Updates current campaign information
 [Back to top](#top)
 
 <p>Updates the current logged-in campaign based on the provided token</p>
