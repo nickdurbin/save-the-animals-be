@@ -39,7 +39,7 @@ function remove(id) {
 }
 
 module.exports = {
-  add, 
+  add,
   find, 
   findBy, 
   findById,
