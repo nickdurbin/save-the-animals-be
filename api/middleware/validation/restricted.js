@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const authenticate = (req, res, next) => {
+const restricted = (req, res, next) => {
   const { authorization } = req.headers
 
   if (authorization) {
@@ -20,5 +20,5 @@ const authenticate = (req, res, next) => {
 }
 
 module.exports = {
-  authenticate
+  restricted
 }
