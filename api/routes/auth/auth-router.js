@@ -1,12 +1,15 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const { generateToken } = require('../../middleware/validation/generateToken')
+const validateLogin = require('../../middleware/validation/validateLogin')
+const validateOrgReg = require('../../middleware/validation/validateOrgReg')
+const validateSupReg = require('../../middleware/validation/validateSupReg')
 const Users = require('../users/user-model')
 const Organizations = require('../organizations/organization-model')
 const router = express.Router()
 const Auth = require('../auth/auth_model')
 
-router.post("/register/supporter", async (req, res, next) => {
+router.post("/register/supporter", validateSupReg, async (req, res, next) => {
   try {
     const user = await Users.add(req.body)
     
@@ -19,7 +22,7 @@ router.post("/register/supporter", async (req, res, next) => {
   }
 })
 
-router.post("/register/organization", async (req, res, next) => {
+router.post("/register/organization", validateOrgReg, async (req, res, next) => {
   try {
     const organization = await Organizations.add(req.body)
     
@@ -31,7 +34,7 @@ router.post("/register/organization", async (req, res, next) => {
   }
 })
 
-router.post("/login", async (req, res, next) => {
+router.post("/login", validateLogin, async (req, res, next) => {
   try {
     const { email, password } = req.body
     const account = await Auth.isAccount(email)
