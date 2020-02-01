@@ -7,7 +7,7 @@ const localPg = {
 
 const pg = require('pg');
 pg.defaults.ssl = true;
-const dbConnection = process.env.DATABASE_URL || localPg; // used to prevent random errors
+const dbConnection = process.env.DATABASE_URL || localPg;
 
 module.exports = {
 
