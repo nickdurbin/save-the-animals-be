@@ -16,16 +16,9 @@ function findById(id) {
   return db("supporters").where({ id }).first("id", "supporter_id", "donation", "message", "campaign_id")
 }
 
-function remove(id) {
-  return db("supporters")
-    .where({ id })
-    .del()
-}
-
 module.exports = {
   add,
   find,
   findBy,
   findById,
-  remove
 }
