@@ -15,7 +15,6 @@ function add(campaign) {
   return db("campaigns").insert(campaign).returning("*")
 }
 
-
 function addDono(donation) {
   return db("supporters").insert(donation).returning("*")
 }
@@ -28,6 +27,10 @@ async function findById(id) {
     return { ...dono, supporter_id: supporter }
   })
   return { ...campaign, completed: campaign.completed === 1 ? true : false, donations }
+}
+
+function findDonoById(id) {
+  return db("supporters").where({ id }).first("id", "donation", "message")
 }
 
 function update(id, changes) {
@@ -49,6 +52,7 @@ module.exports = {
   find, 
   findBy, 
   findById,
+  findDonoById,
   remove,
   update
 }
