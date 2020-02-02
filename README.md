@@ -14,12 +14,12 @@ Save The Animals Application
   - [Updates current user information](#updates-current-user-information)
 
 - [Organization](#organization)
-  - [Updates current org information](#deletes-current-org-information)
+  - [Deletes current org information](#deletes-current-org-information)
   - [Gets current org information](#gets-current-org-information)
   - [Updates current org information](#updates-current-org-information)
 
 - [Campaign](#campaign)
-  - [Updates current campaign information](#deletes-current-campaign-information)
+  - [Deletes current campaign information](#deletes-current-campaign-information)
   - [Gets current campaign information](#gets-current-campaign-information)
   - [Updates current campaign information](#updates-current-campaign-information)
   
@@ -168,7 +168,7 @@ Register-Fields-Required
 ## Registers a new organization
 [Back to top](#top)
 
-<p>Registers a supporter</p>
+<p>Registers a new organization</p>
 
   POST https://save-the-animals-be.herokuapp.com/api/auth/register/organization
 
@@ -464,12 +464,24 @@ Success-Response:
 
 ```
 {
-    id: 1,
-    email: "org1@org1.com",
-    username: "org1",
-    org_name: "Help Animals", 
-    org_description: "The root of our mission is to provide shelter for endangered animals around the world.",
-    campaign_id: 3 
+
+  "id": 2,
+  "username": "org2",
+  "org_name": "Habitat Builder",
+  "org_description": "We find ways to build sustainable habitats for animal species in various parts of the globe.",
+  "campaignList": [
+    {
+      "title": "Help Save the Most Endangered Animal",
+      "animal": "Amur Leopard",
+      "location": "Ulaanbaatar‎, Mongolia",
+      "date": "March 22, 2020",
+      "description": "The amur leopard is the most endangered animal in the world with less than 70 still in existence. We aim to change their narrative.",
+      "funding_goal": 14000,
+      "image": "https://unsplash.com/photos/kN5SquXgtX4",
+      "completed": false
+    }
+  ]
+
 }
 ```
 
