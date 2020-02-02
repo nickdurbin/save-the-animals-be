@@ -3,6 +3,9 @@ const Campaigns = require("./campaign-model")
 const Users = require("../users/user-model")
 const router = express.Router()
 const { restricted } = require("../../middleware/validation/restricted")
+const sgMail = require('@sendgrid/mail');
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.get("/", async (req, res, next) => {
   try {
@@ -38,17 +41,25 @@ router.post("/:id", restricted, async (req, res, next) => {
   try {
     const users = await Users.find()
     const { subject } = req.token
-
     const supporter = users.filter(user => {
-      user.id === subject.id
+      user.id === subject
     })
+
     const campaignId = req.params.id
-    const [id] = await db("supporters").insert(req.body)
-    const donation = await Campaigns.findById(campaignId)
-    const newDonation = await db("supporters").where('id', id).first()
+    const [id] = await Campaigns.addDono({ ...req.body, supporter_id: subject,  campaign_id: campaignId})
+    const newDonation = await Campaigns.findDonoById("id", id)
+
+    const msg = {
+      to: 'savetheanimalsbw@gmail.com',
+      from: 'savetheanimalsbw@gmail.com',
+      subject: 'Thank you for your support!',
+      text: 'Thank you.',
+      html: `Thank you Donator, <br /> We are glad you have chosen to support a cause!<br /><strong>Sincerly, Save the Animals!</strong>`,
+    };
 
     if (supporter) {
-      return res.status(201).json(newDonation)
+      sgMail.send(msg);   
+      return res.status(201).json({ message: "Thank you for your donation!", newDonation})
     } else {
       res.status(403).json({ message: "Unauthorized action. Please login and try your request again."})
     }
