@@ -15,6 +15,11 @@ function add(campaign) {
   return db("campaigns").insert(campaign).returning("*")
 }
 
+
+function addDono(donation) {
+  return db("supporters").insert(donation).returning("*")
+}
+
 async function findById(id) {
   const campaign = await db("campaigns").where({ id }).first()
   const donation = await db("supporters").where("campaign_id", id).select().sum("donation")
@@ -40,6 +45,7 @@ function remove(id) {
 
 module.exports = {
   add,
+  addDono,
   find, 
   findBy, 
   findById,
