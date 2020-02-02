@@ -18,6 +18,7 @@ router.get("/:id", async (req, res, next) => {
     const organization = await Organizations.findById(id)
     return res.json(organization)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 })
@@ -38,7 +39,6 @@ router.put("/:id", async (req, res, next) => {
 
     return res.status(200).json(updatedOrg)
   } catch(error) {
-    console.log(error)
     next(error)
   }
 });
