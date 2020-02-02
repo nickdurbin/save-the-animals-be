@@ -8,7 +8,7 @@ async function find() {
 }
 
 function findBy(filter) {
-  return db("campaigns").where(filter).select("id", "title", "animal", "date", "urgency", "completed")
+  return db("campaigns").where(filter).select("id", "title", "animal", "location", "date", "funding_goal", "urgency", "completed")
 }
 
 function add(campaign) {
