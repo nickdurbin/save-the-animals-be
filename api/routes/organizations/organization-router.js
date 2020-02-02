@@ -25,8 +25,8 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const [id] = await db("organizations").insert(req.body)
-    const newOrg = await db("organizations").where('id', id).first()
+    const [id] = await Organizations.add(req.body)
+    const newOrg = await Organizations.findById('id', id)
     return res.status(201).json(newOrg)
   } catch (error) {
     next(error)
