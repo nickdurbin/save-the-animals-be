@@ -16,7 +16,7 @@ function add(organization) {
 
 async function findById(id) {
   const organization = await db("organizations").where({ id }).first("id", "username", "org_name", "org_description")
-  const campaigns = await db("campaigns").join("organizations", "organizations.campaign_id", "=", "campaigns.id").where("campaigns.id", id).select("title", "animal", "location", "date", "description", "funding_goal", "image", "completed")
+  const campaigns = await db("organizations").join("campaigns", "organizations.id", "=", "campaigns.org_id").where("organizations.id", id).select("title", "animal", "location", "date", "description", "funding_goal", "image", "completed")
   const campaignList = campaigns.map(campaign => {
     return {...campaign, completed: campaign.completed === 1 ? true : false }
   })
