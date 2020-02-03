@@ -1,6 +1,7 @@
 const express = require("express")
 const Campaigns = require("./campaign-model")
 const Users = require("../users/user-model")
+const Organizations = require('../organizations/organization-model')
 const router = express.Router()
 const { restricted } = require("../../middleware/validation/restricted")
 const sgMail = require('@sendgrid/mail');
@@ -29,19 +30,23 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", restricted, async (req, res, next) => {
   try {
-    const users = await Users.find()
+    const organizations = await Organizations.find()
     const { subject, isOrg } = req.token
     console.log(isOrg)
-    const organization = users.filter(user => {
-      user.id === subject
+    const organization = organizations.filter(org => {
+      org.id === subject
     })
-    const [id] = await Campaigns.add(req.body)
+    const [id] = await Campaigns.add({...req.body, org_id: subject })
     const newCampaign= await Campaigns.findById("id", id)
 
     if (isOrg === 0) {
       res.status(401).json({ message: "You are not authorized to create this action. If you are an organization, please create an organization account. Thank you!"})
+    } 
+
+    if (organization) {
+      res.status(201).json(newCampaign)
     } else {
-      return res.status(201).json(newCampaign)
+      res.status(403).json({ message: "This action is forbidden. If you would like to create a campaign, please create an organization account."})
     }
   } catch (error) {
     console.log(error)
