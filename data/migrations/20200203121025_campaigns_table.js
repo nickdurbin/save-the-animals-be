@@ -22,6 +22,13 @@ exports.up = async function(knex) {
     table.boolean("completed")
       .notNullable()
       .defaultTo(false)
+    table.integer("org_id")
+      .unsigned()
+      .references("id")
+      .inTable("organizations")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE")
+      .notNullable()
   })
 };
 

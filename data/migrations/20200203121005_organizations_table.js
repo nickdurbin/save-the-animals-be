@@ -18,14 +18,6 @@ exports.up = async function(knex) {
     table.boolean("isOrg")
       .notNullable()
       .defaultTo(true)
-
-    table.integer("campaign_id")
-      .unsigned()
-      .references("id")
-      .inTable("campaigns")
-      .onDelete("CASCADE")
-      .onUpdate("CASCADE")
-      .unique()
   })
 };
 
