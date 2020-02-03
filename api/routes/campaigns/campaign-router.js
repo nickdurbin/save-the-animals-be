@@ -27,13 +27,25 @@ router.get("/:id", async (req, res, next) => {
   }
 })
 
-router.post("/", async (req, res, next) => {
+router.post("/", restricted, async (req, res, next) => {
   try {
+    const users = await Users.find()
+    const { subject, isOrg } = req.token
+    console.log(isOrg)
+    const organization = users.filter(user => {
+      user.id === subject
+    })
     const [id] = await Campaigns.add(req.body)
     const newCampaign= await Campaigns.findById("id", id)
-    return res.status(201).json(newCampaign)
-  } catch (err) {
-    next(err)
+
+    if (isOrg === 0) {
+      res.status(401).json({ message: "You are not authorized to create this action. If you are an organization, please create an organization account. Thank you!"})
+    } else {
+      return res.status(201).json(newCampaign)
+    }
+  } catch (error) {
+    console.log(error)
+    next(error)
   }
 })
 
@@ -61,7 +73,7 @@ router.post("/:id", restricted, async (req, res, next) => {
       sgMail.send(msg);   
       return res.status(201).json({ message: "Thank you for your donation!", newDonation})
     } else {
-      res.status(403).json({ message: "Unauthorized action. Please login and try your request again."})
+      res.status(401).json({ message: "Unauthorized action. Please login and try your request again."})
     }
 
   } catch (error) {
