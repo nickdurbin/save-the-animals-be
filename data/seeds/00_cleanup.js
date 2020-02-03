@@ -1,6 +1,6 @@
 exports.seed = async (knex) => {
-  await knex("supporters").truncate()
-  await knex("campaigns").truncate()
-  await knex("organizations").truncate()
-  await knex("users").truncate()
+  await knex("supporters").del()
+  await knex("campaigns").del()
+  await knex("organizations").del()
+  await knex("users").del()
 }
