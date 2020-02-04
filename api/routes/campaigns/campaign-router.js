@@ -95,9 +95,10 @@ router.put("/:id", async (req, res, next) => {
     await Campaigns.update(id, campaign)
     
     const newCampaign = await Campaigns.findById(id)
-
+    console.log(newCampaign)
     return res.status(200).json(newCampaign)
   } catch(error) {
+    console.log(error)
     next(error)
   }
 })
