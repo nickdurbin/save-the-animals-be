@@ -7,7 +7,6 @@ const localPg = {
 
 const pg = require('pg');
 pg.defaults.ssl = true;
-pg.ssl.rejectUnauthorized = true;
 const dbConnection = process.env.DATABASE_URL || localPg;
 
 module.exports = {
