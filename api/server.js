@@ -3,7 +3,7 @@ const server = express()
 const middleware = require('./middleware')
 const routes = require('./routes')
 
-server.use(express.json())
+server.use(express.json({ limit: '10kb' }))
 middleware(server)
 routes(server)
 
