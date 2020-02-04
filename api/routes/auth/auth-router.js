@@ -24,7 +24,6 @@ router.post("/register/supporter", validateSupReg, async (req, res, next) => {
     };
     
     if (user) {
-      console.log(user)
       sgMail.send(msg);   
       return res.status(201).json({ message: "User has been successfully registered.", user})
     }
@@ -46,7 +45,6 @@ router.post("/register/organization", validateOrgReg, async (req, res, next) => 
     };
     
     if (organization) {
-      console.log(organization)
       sgMail.send(msg);
       return res.status(201).json({ message: "Organization has been successfully registered.", organization })
     } 

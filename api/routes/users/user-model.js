@@ -9,8 +9,8 @@ function findBy(filter) {
   return db("users").where(filter).select("id", "email", "username", "first_name", "last_name")
 }
 
-function add(user) {
-  user.password = bcrypt.hashSync(user.password, 14)
+async function add(user) {
+  user.password = await bcrypt.hash(user.password, 14)
   return db("users").insert(user).returning("*")
 }
 
