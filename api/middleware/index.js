@@ -1,5 +1,5 @@
 const helmet = require('helmet')
-const xss = require('xss-cleans')
+const xss = require('xss-clean')
 const morgan = require('morgan')
 const cors = require('cors')
 
