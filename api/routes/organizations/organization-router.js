@@ -40,7 +40,7 @@ router.put("/:id", async (req, res, next) => {
     
     await Organizations.update(id, campaign)
     
-    const updatedOrg = await Campaigns.findById(id)
+    const updatedOrg = await Organizations.findById(id)
     return res.status(200).json(updatedOrg)
   } catch(error) {
     next(error)

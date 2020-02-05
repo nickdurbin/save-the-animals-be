@@ -32,7 +32,6 @@ router.post("/", restricted, async (req, res, next) => {
   try {
     const organizations = await Organizations.find()
     const { subject, isOrg } = req.token
-    console.log(isOrg)
     const organization = organizations.filter(org => {
       org.id === subject
     })

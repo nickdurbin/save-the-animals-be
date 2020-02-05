@@ -36,6 +36,7 @@ router.post("/register/supporter", validateSupReg, async (req, res, next) => {
 router.post("/register/organization", validateOrgReg, async (req, res, next) => {
   try {
     const organization = await Organizations.add(req.body)
+    console.log(organization)
     const msg = {
       to: 'savetheanimalsbw@gmail.com',
       from: 'savetheanimalsbw@gmail.com',
